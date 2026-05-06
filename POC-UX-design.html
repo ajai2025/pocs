@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POC Manager UX Design</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+    .page {
+      max-width: 960px;
+      margin: 36px auto;
+      padding: 24px;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+    }
+    h1, h2, h3 {
+      margin: 0 0 16px;
+      color: #111827;
+    }
+    h1 { font-size: 2.1rem; }
+    h2 { font-size: 1.45rem; margin-top: 32px; }
+    h3 { font-size: 1.15rem; margin-top: 24px; }
+    p {
+      margin: 0 0 16px;
+    }
+    ul {
+      margin: 0 0 16px 20px;
+    }
+    pre {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 18px;
+      overflow-x: auto;
+      color: #111827;
+    }
+    .note {
+      margin: 0 0 24px;
+      padding: 18px;
+      background: #ecfdf5;
+      border-left: 4px solid #10b981;
+      border-radius: 12px;
+      color: #065f46;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>POC Manager UX Design</h1>
+    <p>This document describes the UX design for a tabbed proof-of-concept (POC) manager. The design is intended for a future React-based interface, focusing on ease of adding, viewing, and managing multiple POCs.</p>
+
+    <h2>Overview</h2>
+    <p>Build a repository UX for managing multiple POCs using a tabbed interface. Each POC has its own page, and users can add, rename, reorder, or remove POCs visually.</p>
+
+    <h2>Goals</h2>
+    <ul>
+      <li>Allow users to create multiple POCs quickly.</li>
+      <li>Keep POCs organized with tabs for easy switching.</li>
+      <li>Provide a clean entry point for POC details, status, and notes.</li>
+      <li>Support a lightweight structure for future React implementation.</li>
+    </ul>
+
+    <h2>Main Screens</h2>
+
+    <h3>1. Dashboard / POC List</h3>
+    <ul>
+      <li>Header with project title and <strong>+ New POC</strong> button.</li>
+      <li>Top area showing summary cards or counts of POCs by status.</li>
+      <li>Primary content panel with the active POC tabbed interface.</li>
+    </ul>
+
+    <h3>2. Tabbed POC Workspace</h3>
+    <ul>
+      <li>Tabs across the top for each open POC.</li>
+      <li>Visible <strong>+</strong> button to add a new POC tab.</li>
+      <li>Each tab shows the POC name and optional close icon.</li>
+      <li>If there are many tabs, include a scrollable tab row or overflow menu.</li>
+    </ul>
+
+    <h3>3. POC Detail Page</h3>
+    <ul>
+      <li>Title editing field at the top.</li>
+      <li>Status selector: <em>Draft</em>, <em>In Progress</em>, <em>Review</em>, <em>Completed</em>.</li>
+      <li>Description / summary textarea.</li>
+      <li>Sections for objectives, key findings, and next steps.</li>
+      <li>Optional attachments or links area.</li>
+    </ul>
+
+    <h2>User Flow</h2>
+    <ol>
+      <li>User opens the POC manager.</li>
+      <li>They click <strong>+ New POC</strong>.</li>
+      <li>A new tab appears with a default name like <strong>POC 1</strong>.</li>
+      <li>User clicks the tab to edit details.</li>
+      <li>They can switch between tabs to work on another POC.</li>
+      <li>A close action removes a POC from the tab list.</li>
+    </ol>
+
+    <h2>Component Layout</h2>
+
+    <h3>Header</h3>
+    <ul>
+      <li>Left: Application/App name.</li>
+      <li>Right: <strong>+ New POC</strong> button and optional <strong>Export</strong>/<strong>Settings</strong> icons.</li>
+    </ul>
+
+    <h3>Tab Bar</h3>
+    <ul>
+      <li>Layout: <strong>POC 1</strong>, <strong>POC 2</strong>, <strong>POC 3</strong>, <strong>+</strong>.</li>
+      <li>Active tab visually highlighted.</li>
+      <li>Overflow behavior for many tabs.</li>
+    </ul>
+
+    <h3>Content Panel</h3>
+    <ul>
+      <li>Panel title and edit controls.</li>
+      <li>Form layout with vertical sections.</li>
+      <li>Sidebar or collapsible panel for quick actions and status.</li>
+    </ul>
+
+    <h2>Interaction Details</h2>
+    <ul>
+      <li><strong>+ New POC</strong> creates a new tab and automatically focuses it.</li>
+      <li>Click tab to switch POCs.</li>
+      <li>Inline edit for the POC title and status.</li>
+      <li>Save state automatically as user types, or show <strong>Saved</strong> status.</li>
+      <li>Close tab shows confirmation if content is unsaved or contains text.</li>
+    </ul>
+
+    <h2>Responsive Behavior</h2>
+    <ul>
+      <li>Desktop: tab row at top, full detail panel.</li>
+      <li>Tablet: compressed tab labels with overflow menu.</li>
+      <li>Mobile: tab list becomes horizontal scroll or collapsible dropdown.</li>
+    </ul>
+
+    <h2>Visual Style Suggestions</h2>
+    <ul>
+      <li>Minimal, modern card-based UI.</li>
+      <li>Soft shadows and a light neutral background.</li>
+      <li>Primary accent color for active tab state.</li>
+      <li>Clear section headings and subtle dividers.</li>
+    </ul>
+
+    <h2>Example Wireframe</h2>
+    <pre>
+------------------------------------------------------
+| Logo | POC Manager                          [+ New] |
+------------------------------------------------------
+| [POC 1] [POC 2] [POC 3] [ + ]                 [⋯] |
+------------------------------------------------------
+| Title: [POC 1 - Inventory AI]                  [Save]
+| Status: [In Progress v]
+| Description:
+| [Multiline textarea for summary and goals...]   
+| --------------------------------------------------
+| Objectives:                                     
+| - Define target audience                         
+| - Build quick prototype                          
+| --------------------------------------------------
+| Findings:                                       
+| - Note 1                                        
+| - Note 2                                        
+| --------------------------------------------------
+| Next Steps:                                     
+| - Add user feedback                              
+------------------------------------------------------
+    </pre>
+
+    <h2>Notes for Implementation</h2>
+    <ul>
+      <li>Use a tab component with active state and dynamic tab creation.</li>
+      <li>Build POC cards as a reusable detail form.</li>
+      <li>Keep the design modular so the UX can be extended with search, filters, or export features later.</li>
+    </ul>
+  </div>
+</body>
+</html>
